@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: retainiq-api
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python setup.py"
+    startCommand: "uvicorn app:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+    disk:
+      name: retainiq-data
+      mountPath: /opt/render/project/src/datasets
+      sizeGB: 1
